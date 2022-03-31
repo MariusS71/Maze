@@ -1,0 +1,34 @@
+Saioc Marius Andrei 
+
+	Mi-a fost destul de clar de la inceput ca voi merge pe o solutie cu Wall Follower si probabil
+        folosind peretele drept fiind mai intuitiv. Atunci imi facusem un plan de implementare foarte
+        asemanator cu abordarea in stil de programare C.
+	
+	Dupa participarea la q&a, am inteles ca nu am acces la toata matricea simultan si nu este permis
+	nici verificarea a doua sau mai multe pozitii in acelasi timp, fiind nevoie de cache-ing pentru
+	acest lucru. Am mai inteles si faptul ca rezolvarea problei va fi practic un automat de stari.
+	
+	Astfel cu lucrurile lamurite si cerinta clara am ramas tot la Wall Follower pe dreapta; 
+	verificand o singura valoare la un moment dat a insemnat ca trebuie sa ma deplasez practic in 
+	posibilul zid, iar daca maze_in-ul imi spune ca am zid acolo, trebuie sa ma intorc. Asta
+	inseamna ca ar trebui sa stiu in permanenta de unde am venit, asa ca mi-am denumit starile
+	in functie de acest lucru si am facut o schita a codului pe hartie, tinand cont ca pentru a urmari
+	zidul va trebui sa fac dreapta la fiecare pas; daca am dat de zid ma intorc, daca nu sunt in zid pot 
+	marca locul de trecere si sa incerc sa verific pozitia din dreapta ducandu-ma efectiv acolo.
+	
+	Dupa implementare (dupa partea in care mi-am amintit ca dupa ce dai un semnal ca maze_oe=1 trebuie sa 
+	treaca un ciclu de ceas pentru a citi maze_in-ul, cum se scriu always-urile si case-ul si alte
+	lucruri de sintaxa; dupa ce am setat max_cycles din tester la 10 000, pentru ca in stadiul in care
+	automatul nu functiona si nu ajungea la done fiecare test facea 2 milioane si jumatate de pasi 
+	care durau in jur de 20 de minute) am primit done pe testul basic, dar totusi testul dadea fail,
+	iar restul se duceau la max_cycles.
+	
+	Apoi am afisat Starea si pozitia actuala la fiecare ciclu si am urmarit evolutia pe fisierul cu
+	maze-urile. Aveam bucle infinite pentru ca la unele colturi se modifica peretele in 0, si ramaneam
+	cu un 4 zero-uri, iar algoritmul meu facand doar dreapta se invartea acolo. Am realizat, dupa ceva
+	timp de gandire, ca faceam citirea si scrierea in acelasi ciclu de ceas, astfel in loc sa scriu pe 
+	pozitia curenta, scriam pe urmatoarea. Am rezolvat problema dubland starile in care schimbam pozitia
+	pentru ca mai intai sa scrie pe locul curent si de abia apoi sa treaca mai departe. Da, cu acest 
+	procedeu am dublat numarul de pasi pe fiecare test, dar fiindca la alegerea algorimului nu 
+	mi-am propus sa obtin un numar minim, si cum scopul era doar sa ajung la finalul maze-ului, 
+	nu am considerat ca fiind o problema.
